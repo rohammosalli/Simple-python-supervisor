@@ -1,0 +1,9 @@
+{
+    "logConfig": {
+        "filename": "logs/mars.log",
+        "level": "DEBUG",
+        "format": "%(asctime)s:%(levelname)s:%(message)s"
+    },
+
+    "checkCommand": "pgrep"
+}
