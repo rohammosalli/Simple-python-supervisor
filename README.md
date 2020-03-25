@@ -7,6 +7,7 @@ Run the application
 ```bash
 
 virtualenv -p python3 env
+source env/bin/activate
 pip install -r requirements.txt
 
 python mars.py --process_name nginx --input_command "systemctl start nginx"  --max_fail 3  --check_interval 1 --restart_interval 3
