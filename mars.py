@@ -5,7 +5,7 @@ import time
 import schedule
 import daemon
 import args
-
+import sys
 #pas the arguments 
 process_name = args.process_name
 max_fail = args.max_fail
@@ -15,7 +15,7 @@ check_interval =args.check_interval
 
 
 CUNT = 0 
-
+timer = 0
 
 daemon.logger.info("######## Logs ######## \n \
     \trestart_interval = %s, \n \
@@ -27,8 +27,6 @@ daemon.logger.info("######## Logs ######## \n \
 
 
 
-def life_check():
-    global CUNT
 
 def checkIfProcessRunning(processName):
     '''
@@ -46,29 +44,25 @@ def checkIfProcessRunning(processName):
 
 
 # Check if any  process was running or not. then run it
-if checkIfProcessRunning(process_name):
-    daemon.logger.info("  %s process is running",process_name)
-    print("  {0} process is running".format(process_name))
-else:
-    CUNT = CUNT + 1
-    if CUNT >= int(max_fail):
-        daemon.logger.error("  max number of retires reached, unable to start")
-        print("program unable to start")
-        exit()
-        time.sleep(int(restart_interval))    
-    else:
-        print('No {0} process is running'.format(process_name))
-        try:
-            print('The {0} process is running now'.format(process_name))
-            subprocess.call([input_command])
-            
-        except OSError:
-            print (input_command,' this command  does not exist')
-            daemon.logger.error("this command {0} does not exist".format(input_command))
+
+
+def startpc():
+    global CUNT
+    if checkIfProcessRunning(process_name) is False:
+        daemon.logger.info("  %s process is not run try to run",process_name)
+        os.system(input_command)
+        CUNT = CUNT + 1    
+        if CUNT >= int(max_fail):
+            daemon.logger.error("max number of retires reached")
             exit()
+        time.sleep(int(restart_interval))
+    else:
+        daemon.logger.debug("is running with pid: %s", process_name)
+        CUNT = 0
+         
 
 
-schedule.every(int(check_interval)).seconds.do(life_check)
+schedule.every(int(restart_interval)).seconds.do(startpc)
 
 while 1:
     schedule.run_pending()
