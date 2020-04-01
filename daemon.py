@@ -1,12 +1,10 @@
 import os
 import json
 import logging
-import logging.handlers as handlers
 
 if not os.path.exists("logs"):
     os.makedirs("logs")
 
-logging.getLogger('schedule').propagate = False
 
 # read the config file 
 with open('config.json') as config_file:
