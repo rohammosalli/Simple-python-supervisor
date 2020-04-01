@@ -12,9 +12,10 @@ max_fail = args.max_fail
 restart_interval = args.restart_interval
 input_command = args.input_command
 check_interval =args.check_interval
+
+
 CUNT = 0 
 
-daemon.logging.getLogger('schedule').propagate = False
 
 daemon.logger.info("######## Logs ######## \n \
     \trestart_interval = %s, \n \
