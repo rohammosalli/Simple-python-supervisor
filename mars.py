@@ -17,7 +17,7 @@ check_interval =args.check_interval
 CUNT = 0 
 timer = 0
 
-daemon.logger.info("######## Logs ######## \n \
+daemon.logger.info("######## user input ######## \n \
     \trestart_interval = %s, \n \
     \tmax_fail = %s , \n \
     \tprocess_name = %s , \n \

@@ -10,7 +10,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+.vscode
 # Distribution / packaging
 .Python
 build/
@@ -55,7 +55,7 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
-
+env/
 # Translations
 *.mo
 *.pot
